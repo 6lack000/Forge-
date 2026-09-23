@@ -1,4 +1,3 @@
-
 import type { ChatCompletionTool } from "openai/resources/chat/completions";
 
 
@@ -20,148 +19,152 @@ export const tools: ChatCompletionTool[]  = [
       },
     },
   },
-    {
+  {
     type: "function",
     function: {
-        name: "write_file",
-        description: "Write content to a file in the current project.",
-        parameters: {
+      name: "write_file",
+      description: "Write content to a file in the current project.",
+      parameters: {
         type: "object",
         properties: {
-            path: {
+          path: {
             type: "string",
             description: "Path of the file to write",
-            },
-            content: {
+          },
+          content: {
             type: "string",
             description: "Content to write into the file",
-            },
+          },
         },
         required: ["path", "content"],
-        },
-        },
-    },  
-    {
-  type: "function",
-  function: {
-    name: "list_files",
-    description: "List files and directories inside a directory.",
-    parameters: {
-      type: "object",
-      properties: {
-        path: {
-          type: "string",
-          description: "Path of the directory to list",
-        },
       },
-      required: ["path"],
     },
   },
-},
-{
-  type: "function",
-  function: {
-    name: "search_code",
-    description: "Search for text inside files in the project.",
-    parameters: {
-      type: "object",
-      properties: {
-        query: {
-          type: "string",
-          description: "Text to search for",
+  {
+    type: "function",
+    function: {
+      name: "list_files",
+      description: "List files and directories inside a directory.",
+      parameters: {
+        type: "object",
+        properties: {
+          path: {
+            type: "string",
+            description: "Path of the directory to list",
+          },
         },
-        path: {
-          type: "string",
-          description: "Directory to search inside",
-        },
+        required: ["path"],
       },
-      required: ["query", "path"],
     },
   },
-},
-
-{
-  type: "function",
-  function: {
-    name: "run_command",
-    description: "Execute a shell command in the current project directory.",
-    parameters: {
-      type: "object",
-      properties: {
-        command: {
-          type: "string",
-          description: "The shell command to execute.",
+  {
+    type: "function",
+    function: {
+      name: "search_code",
+      description: "Search for text inside files in the project.",
+      parameters: {
+        type: "object",
+        properties: {
+          query: {
+            type: "string",
+            description: "Text to search for",
+          },
+          path: {
+            type: "string",
+            description: "Directory to search inside",
+          },
         },
+        required: ["query", "path"],
       },
-      required: ["command"],
     },
   },
-},
-{
-  type: "function",
-  function: {
-    name: "git_status",
-    description: "Show the current Git working tree status.",
-    parameters: {
-      type: "object",
-      properties: {},
-      required: [],
-    },
-  },
-},
-{
-  type: "function",
-  function: {
-    name: "git_diff",
-    description: "Show the current uncommitted Git changes.",
-    parameters: {
-      type: "object",
-      properties: {},
-      required: [],
-    },
-  },
-},
-{
-  type: "function",
-  function: {
-    name: "git_log",
-    description: "Show the 10 most recent Git commits.",
-    parameters: {
-      type: "object",
-      properties: {},
-      required: [],
-    },
-  },
-},
-{
-  type: "function",
-  function: {
-    name: "git_branch",
-    description: "Show the current Git branch.",
-    parameters: {
-      type: "object",
-      properties: {},
-      required: [],
-    },
-  },
-},
-{
-  type: "function",
-  function: {
-    name: "git_commit",
-    description: "Create a Git commit with the provided commit message.",
-    parameters: {
-      type: "object",
-      properties: {
-        message: {
-          type: "string",
-          description: "The commit message.",
+  {
+    type: "function",
+    function: {
+      name: "run_command",
+      description: "Execute a shell command in the current project directory.",
+      parameters: {
+        type: "object",
+        properties: {
+          command: {
+            type: "string",
+            description: "The shell command to execute.",
+          },
         },
+        required: ["command"],
       },
-      required: ["message"],
     },
   },
-},
-
-
+  {
+    type: "function",
+    function: {
+      name: "git_status",
+      description: "Show the current Git working tree status.",
+      parameters: {
+        type: "object",
+        properties: {},
+        required: [],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "git_diff",
+      description: "Show the current uncommitted Git changes.",
+      parameters: {
+        type: "object",
+        properties: {},
+        required: [],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "git_log",
+      description: "Show the 10 most recent Git commits.",
+      parameters: {
+        type: "object",
+        properties: {},
+        required: [],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "git_branch",
+      description: "Show the current Git branch.",
+      parameters: {
+        type: "object",
+        properties: {},
+        required: [],
+      },
+    },
+  },
+  {
+    type: "function",
+    function: {
+      name: "git_commit",
+      description: "Create a Git commit, optionally staging specified files.",
+      parameters: {
+        type: "object",
+        properties: {
+          message: {
+            type: "string",
+            description: "The commit message.",
+          },
+          files: {
+            type: "array",
+            items: {
+              type: "string",
+            },
+            description: "The files to stage and include in the commit.",
+          },
+        },
+        required: ["message", "files"],
+      },
+    },
+  },
 ];
