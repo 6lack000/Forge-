@@ -8,6 +8,7 @@ import { gitStatus } from "./git-status.js";
 import { gitDiff } from "./git-diff.js";
 import { gitLog } from "./git-log.js";
 import { gitBranch } from "./git-branch.js";
+import { gitCommit } from "./git-commit.js";
 
 
 export const toolRegistry: Record<string, ToolFunction> = {
@@ -20,5 +21,5 @@ export const toolRegistry: Record<string, ToolFunction> = {
   git_diff: gitDiff,
   git_log: gitLog,
   git_branch: gitBranch,
-
+  git_commit: gitCommit,
 };

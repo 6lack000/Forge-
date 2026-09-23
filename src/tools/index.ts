@@ -145,6 +145,23 @@ export const tools: ChatCompletionTool[]  = [
     },
   },
 },
+{
+  type: "function",
+  function: {
+    name: "git_commit",
+    description: "Create a Git commit with the provided commit message.",
+    parameters: {
+      type: "object",
+      properties: {
+        message: {
+          type: "string",
+          description: "The commit message.",
+        },
+      },
+      required: ["message"],
+    },
+  },
+},
 
 
 ];
