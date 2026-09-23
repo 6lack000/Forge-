@@ -121,6 +121,30 @@ export const tools: ChatCompletionTool[]  = [
     },
   },
 },
+{
+  type: "function",
+  function: {
+    name: "git_log",
+    description: "Show the 10 most recent Git commits.",
+    parameters: {
+      type: "object",
+      properties: {},
+      required: [],
+    },
+  },
+},
+{
+  type: "function",
+  function: {
+    name: "git_branch",
+    description: "Show the current Git branch.",
+    parameters: {
+      type: "object",
+      properties: {},
+      required: [],
+    },
+  },
+},
 
 
 ];
