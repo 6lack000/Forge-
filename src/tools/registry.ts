@@ -4,6 +4,7 @@ import type { ToolFunction } from "./types.js";
 import { listFiles } from "./list-files.js";
 import { searchCode } from "./search-code.js";
 import { runCommand } from "./run-command.js";
+import { gitStatus } from "./git-status.js";
 
 export const toolRegistry: Record<string, ToolFunction> = {
   read_file: readFile,
@@ -11,4 +12,5 @@ export const toolRegistry: Record<string, ToolFunction> = {
   list_files: listFiles,
   search_code: searchCode,
   run_command: runCommand,
+  git_status: gitStatus,
 };

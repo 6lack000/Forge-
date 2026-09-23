@@ -97,6 +97,18 @@ export const tools: ChatCompletionTool[]  = [
     },
   },
 },
+{
+  type: "function",
+  function: {
+    name: "git_status",
+    description: "Show the current Git working tree status.",
+    parameters: {
+      type: "object",
+      properties: {},
+      required: [],
+    },
+  },
+},
 
 
 ];
