@@ -5,6 +5,7 @@ import { listFiles } from "./list-files.js";
 import { searchCode } from "./search-code.js";
 import { runCommand } from "./run-command.js";
 import { gitStatus } from "./git-status.js";
+import { gitDiff } from "./git-diff.js";
 
 export const toolRegistry: Record<string, ToolFunction> = {
   read_file: readFile,
@@ -13,4 +14,5 @@ export const toolRegistry: Record<string, ToolFunction> = {
   search_code: searchCode,
   run_command: runCommand,
   git_status: gitStatus,
+  git_diff: gitDiff,
 };

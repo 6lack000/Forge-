@@ -109,6 +109,18 @@ export const tools: ChatCompletionTool[]  = [
     },
   },
 },
+{
+  type: "function",
+  function: {
+    name: "git_diff",
+    description: "Show the current uncommitted Git changes.",
+    parameters: {
+      type: "object",
+      properties: {},
+      required: [],
+    },
+  },
+},
 
 
 ];
