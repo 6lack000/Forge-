@@ -9,6 +9,7 @@ import { gitDiff } from "./git-diff.js";
 import { gitLog } from "./git-log.js";
 import { gitBranch } from "./git-branch.js";
 import { gitCommit } from "./git-commit.js";
+import { editFile } from "./edit-file.js";
 
 
 export const toolRegistry: Record<string, ToolFunction> = {
@@ -22,4 +23,5 @@ export const toolRegistry: Record<string, ToolFunction> = {
   git_log: gitLog,
   git_branch: gitBranch,
   git_commit: gitCommit,
+  edit_file: editFile,
 };

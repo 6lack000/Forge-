@@ -1,3 +1,6 @@
+import fs from "fs";
+import path from "path";
+
 import { scanProject, saveContext } from "./scanner.js";
 
 import { buildIndex, saveIndex } from "./indexer.js";
@@ -49,4 +52,35 @@ export function getDependencies(
 ): string[] {
 
   return context.graph[file] ?? [];
+}
+
+export function getRelevantFiles(
+  context: CodebaseContext,
+  file: string
+): string[] {
+  const dependencies = getDependencies(context, file);
+  const dependents = getDependents(context, file);
+
+  return [
+    file,
+    ...dependencies,
+    ...dependents,
+  ];
+}
+
+export function getRelevantContext(
+  context: CodebaseContext,
+  rootPath: string,
+  file: string
+): string {
+  const relevantFiles = getRelevantFiles(context, file);
+
+  return relevantFiles
+    .map((relativePath) => {
+      const fullPath = path.join(rootPath, relativePath);
+      const content = fs.readFileSync(fullPath, "utf-8");
+
+      return `FILE: ${relativePath}\n\n${content}`;
+    })
+    .join("\n\n---\n\n");
 }

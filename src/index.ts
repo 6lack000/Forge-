@@ -3,7 +3,11 @@ import {
   buildCodebaseContext,
   getDependents,
   getDependencies,
+  getRelevantFiles,
+  getRelevantContext,
+
 } from "./context/manager.js";
+import { retrieveContext } from "./context/retriever.js";
 
 
 const rootPath = process.cwd();
@@ -26,6 +30,34 @@ const dependents = getDependents(
 console.log("Files that depend on executor.ts:");
 console.log(dependents);
 
+const relevantFiles = getRelevantFiles(
+  context,
+  "src/tools/executor.ts"
+);
+
+console.log("Relevant files:");
+console.log(relevantFiles);
+
+const relevantContext = getRelevantContext(
+  context,
+  rootPath,
+  "src/tools/executor.ts"
+);
+
+console.log("Relevant context:");
+console.log(relevantContext);
+
+const prompt = process.argv.slice(2).join(" ");
+
+const retrievedContext = retrieveContext(
+  context,
+  rootPath,
+  prompt
+);
+
+console.log("Retrieved context:");
+console.log(retrievedContext);
+
 const codebaseContext = `
 CODEBASE CONTEXT
 
@@ -36,8 +68,8 @@ Dependency Graph:
 ${JSON.stringify(context.graph, null, 2)}
 `;
 
-const prompt = process.argv.slice(2).join(" ");
+
 
 await runAgent(
-  `${codebaseContext}\n\nUSER REQUEST:\n${prompt}`
+  `${retrievedContext}\n\nUSER REQUEST:\n${prompt}`
 );

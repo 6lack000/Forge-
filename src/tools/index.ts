@@ -167,4 +167,29 @@ export const tools: ChatCompletionTool[]  = [
       },
     },
   },
+  {
+  type: "function",
+  function: {
+    name: "edit_file",
+    description: "Edit an existing file by replacing specific text.",
+    parameters: {
+      type: "object",
+      properties: {
+        path: {
+          type: "string",
+          description: "Path of the file to edit",
+        },
+        old: {
+          type: "string",
+          description: "Exact text to find in the file",
+        },
+        new: {
+          type: "string",
+          description: "Text to replace the old text with",
+        },
+      },
+      required: ["path", "old", "new"],
+    },
+  },
+},
 ];
