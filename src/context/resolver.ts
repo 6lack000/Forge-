@@ -56,4 +56,3 @@ const result = resolveImport(
   "./tools/executor.js"
 );
 
-console.log(result);

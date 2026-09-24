@@ -1,45 +1,43 @@
 import { runAgent } from "./agent.js";
-import { scanProject, saveContext } from "./context/scanner.js";
 import {
-  buildIndex,
-  saveIndex,
-} from "./context/indexer.js";
-import {
-  buildDependencyGraph,
-  saveGraph,
-} from "./context/graph.js";
-import { findDependents } from "./context/graph.js";
+  buildCodebaseContext,
+  getDependents,
+  getDependencies,
+} from "./context/manager.js";
 
 
 const rootPath = process.cwd();
 
-const files = scanProject(rootPath);
+const context = buildCodebaseContext(rootPath);
 
-saveContext(rootPath, files);
+const dependencies = getDependencies(
+  context,
+  "src/agent.ts"
+);
 
-const index = buildIndex(rootPath, files);
+console.log("Dependencies of agent.ts:");
+console.log(dependencies);
 
-saveIndex(rootPath, index);
-
-const graph = buildDependencyGraph(index);
-
-const dependents = findDependents(
-  graph,
+const dependents = getDependents(
+  context,
   "src/tools/executor.ts"
 );
 
-console.log("Dependents of executor.ts:");
+console.log("Files that depend on executor.ts:");
 console.log(dependents);
 
-saveGraph(rootPath, graph);
+const codebaseContext = `
+CODEBASE CONTEXT
 
-console.log("Dependency graph:");
+Files:
+${context.files.join("\n")}
 
-console.log(JSON.stringify(graph, null, 2));
-
-console.log(`Indexed ${files.length} files.`);
+Dependency Graph:
+${JSON.stringify(context.graph, null, 2)}
+`;
 
 const prompt = process.argv.slice(2).join(" ");
 
-await runAgent(prompt);
-
+await runAgent(
+  `${codebaseContext}\n\nUSER REQUEST:\n${prompt}`
+);
